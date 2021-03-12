@@ -94,7 +94,6 @@ async def connect(
     await protocol.wait_closed()
 
 
-@asynccontextmanager
 async def connect_awaitable(
         host: str,
         port: int,
