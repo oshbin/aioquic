@@ -104,7 +104,7 @@ async def connect_awaitable(
         stream_handler: Optional[QuicStreamHandler] = None,
         wait_connected: bool = True,
         local_port: int = 0,
-) -> QuicConnectionProtocol:
+) -> (asyncio.Transport, QuicConnectionProtocol):
     """
     Connect to a QUIC server at the given `host` and `port`.
 
@@ -159,7 +159,7 @@ async def connect_awaitable(
     )
 
     # connect
-    _, protocol = await loop.create_datagram_endpoint(
+    transport, protocol = await loop.create_datagram_endpoint(
         lambda: create_protocol(connection, stream_handler=stream_handler),
         local_addr=(local_host, local_port),
     )
@@ -167,4 +167,4 @@ async def connect_awaitable(
     protocol.connect(addr)
     if wait_connected:
         await protocol.wait_connected()
-    return protocol
+    return transport, protocol
