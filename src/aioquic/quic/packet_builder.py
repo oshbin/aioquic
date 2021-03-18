@@ -17,7 +17,7 @@ from .packet import (
     is_long_header,
 )
 
-PACKET_MAX_SIZE = 15000
+PACKET_MAX_SIZE = 16128
 PACKET_LENGTH_SEND_SIZE = 2
 PACKET_NUMBER_SEND_SIZE = 2
 
